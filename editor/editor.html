@@ -5,6 +5,7 @@
 
     <!-- External Scripts-->
     <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <!-- Internal Scripts-->
@@ -13,15 +14,14 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="container" id="capture">
         <img id="eetzaal" src="./img/eetzaal.png" height="100%" width="100%"/> <!--height="532px" width="945"-->
-        <!--<div id="drag-1" class="draggable">
-            <p> You can drag one element </p>
-        </div>-->
     </div>
 
     <ul id="button-list"></ul>
     <ul id="item-list"></ul>
+
+    <input type="button" value="To canvas" onclick="exportHTML();"/>
 </body>
 
 </html>

@@ -98,3 +98,9 @@ function dragMoveListener(event) {
 
 // this is used later in the resizing and gesture demos
 window.dragMoveListener = dragMoveListener
+
+var exportHTML = function() {
+    html2canvas(document.querySelector("#capture")).then(canvas => {
+        document.body.appendChild(canvas)
+    });
+}
