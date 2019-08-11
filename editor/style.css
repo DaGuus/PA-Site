@@ -1,0 +1,29 @@
+.container {
+    position: relative;
+    height: 532px;
+    width: 945px;
+}
+
+.eettafel {
+    background-color: #29e;
+}
+
+.draggable {
+    z-index: 1;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 20%;
+    height: 50%;
+    margin: 0px;
+    color: white;
+    /*padding: 4%;*/
+    touch-action: none;
+    user-select: none;
+    -webkit-transform: translate(0px, 0px);
+            transform: translate(0px, 0px);
+}
+
+#eetzaal {
+    z-index: 0
+}
