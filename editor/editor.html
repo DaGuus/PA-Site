@@ -3,25 +3,25 @@
 <head>
     <title>De grote PA website - Feestplan Editor</title>
 
+    <!-- External Scripts-->
     <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Internal Scripts-->
     <script type="text/javascript" src="interactable.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 
 <body>
     <div class="container">
-        <img id="eetzaal" src="./img/eetzaal.png" height="532px" width="945"/>
+        <img id="eetzaal" src="./img/eetzaal.png" height="100%" width="100%"/> <!--height="532px" width="945"-->
         <!--<div id="drag-1" class="draggable">
             <p> You can drag one element </p>
         </div>-->
     </div>
 
-    <input type="button" value="Add eettafel" onclick="onAdd();"/>
-
-    <ul id="item-list">
-
-    </ul>
+    <ul id="button-list"></ul>
+    <ul id="item-list"></ul>
 </body>
 
 </html>

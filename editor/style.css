@@ -1,7 +1,11 @@
+.image-button {
+    width: 30px;
+}
+
 .container {
     position: relative;
-    height: 532px;
-    width: 945px;
+    height: 798px;
+    width: 1417px;
 }
 
 .eettafel {
@@ -16,8 +20,8 @@
     width: 20%;
     height: 50%;
     margin: 0px;
+    padding: 10px;
     color: white;
-    /*padding: 4%;*/
     touch-action: none;
     user-select: none;
     -webkit-transform: translate(0px, 0px);
