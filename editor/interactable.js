@@ -4,6 +4,9 @@ var scale = 1.5;
 var dragMode = true;
 var danspaal = false;
 
+var canvasWidth = 1400;
+var meterScale = 80;
+
 var objects = [
     { name: "Eettafel", width: 120, height: 80, color: "#0000FF", border: "#000000" },
     { name: "PA Podium", width: 120 * 2, height: 80 * 5, color: "#A4010E", border: "#000000" },
@@ -14,6 +17,144 @@ var objects = [
 ];
 
 $(document).ready(function () {
+    // Start of canvas stuff
+    var canvas = document.getElementById('canvas');
+
+    if (canvas.getContext) {
+        var ctx = canvas.getContext('2d');
+        // drawing code here
+        ctx.fillRect(0, 0, canvasWidth, canvasWidth);
+        ctx.clearRect(5, 5, canvasWidth - 10, canvasWidth - 10);
+
+        var offset = 50;
+        var lineDist = meterScale * 0.5;
+        var eetzaalX = offset + (lineDist / 2);
+        var eetzaalY = offset + (lineDist * 2);
+
+        ctx.lineWidth = 2;
+        ctx.font = '14px Arial';
+
+        ctx.beginPath();
+        ctx.moveTo(offset, offset);
+        ctx.lineTo(offset + (13.20 * meterScale) + lineDist, offset);
+        ctx.moveTo(offset, offset + lineDist);
+        ctx.lineTo(offset + (13.20 * meterScale) + lineDist, offset + lineDist);
+
+        ctx.moveTo(eetzaalX, offset - (lineDist / 2));
+        ctx.lineTo(eetzaalX, offset + (lineDist * 1.5));
+        ctx.moveTo(eetzaalX + (13.20 * meterScale), offset - (lineDist / 2));
+        ctx.lineTo(eetzaalX + (13.20 * meterScale), offset + (lineDist * 1.5));
+        ctx.moveTo(eetzaalX + (6.95 * meterScale), offset + (lineDist * 0.5));
+        ctx.lineTo(eetzaalX + (6.95 * meterScale), offset + (lineDist * 1.5));
+        ctx.moveTo(eetzaalX + (7.95 * meterScale), offset + (lineDist * 0.5));
+        ctx.lineTo(eetzaalX + (7.95 * meterScale), offset + (lineDist * 1.5));
+        ctx.moveTo(eetzaalX - lineDist, eetzaalY - (lineDist * 0.5));
+        ctx.lineTo(eetzaalX - lineDist, eetzaalY + (meterScale * 4.3) + (lineDist * 0.5));
+        ctx.moveTo(eetzaalX - (lineDist * 1.5), eetzaalY);
+        ctx.lineTo(eetzaalX - (lineDist * 0.5), eetzaalY);
+        ctx.moveTo(eetzaalX - (lineDist * 1.5), eetzaalY + (meterScale * 4.3));
+        ctx.lineTo(eetzaalX - (lineDist * 0.5), eetzaalY + (meterScale * 4.3));
+        ctx.moveTo(eetzaalX + (13.20 * meterScale) + lineDist, eetzaalY - (lineDist * 0.5));
+        ctx.lineTo(eetzaalX + (13.20 * meterScale) + lineDist, eetzaalY + (meterScale * 5.7) + (lineDist * 0.5));
+        ctx.moveTo(eetzaalX + (13.20 * meterScale) + (lineDist * 2), eetzaalY - (lineDist * 0.5));
+        ctx.lineTo(eetzaalX + (13.20 * meterScale) + (lineDist * 2), eetzaalY + (meterScale * 5.7) + (lineDist * 0.5));
+        ctx.moveTo(eetzaalX + (13.20 * meterScale) + lineDist - (lineDist * 0.5), eetzaalY);
+        ctx.lineTo(eetzaalX + (13.20 * meterScale) + lineDist + (lineDist * 1.5), eetzaalY);
+        ctx.moveTo(eetzaalX + (13.20 * meterScale) + lineDist - (lineDist * 0.5), eetzaalY + (meterScale * 5.7));
+        ctx.lineTo(eetzaalX + (13.20 * meterScale) + lineDist + (lineDist * 1.5), eetzaalY + (meterScale * 5.7));
+        ctx.moveTo(eetzaalX + (13.20 * meterScale) + lineDist - (lineDist * 0.5), eetzaalY + (meterScale * 1.6));
+        ctx.lineTo(eetzaalX + (13.20 * meterScale) + lineDist + (lineDist * 0.5), eetzaalY + (meterScale * 1.6));
+        ctx.moveTo(eetzaalX + (13.20 * meterScale) + lineDist - (lineDist * 0.5), eetzaalY + (meterScale * 3.9));
+        ctx.lineTo(eetzaalX + (13.20 * meterScale) + lineDist + (lineDist * 0.5), eetzaalY + (meterScale * 3.9));
+        ctx.moveTo(eetzaalX + (13.20 * meterScale) - (lineDist * 0.3), eetzaalY + (meterScale * 1.6));
+        ctx.lineTo(eetzaalX + (13.20 * meterScale) + (lineDist * 0.3), eetzaalY + (meterScale * 1.6));
+        ctx.moveTo(eetzaalX + (13.20 * meterScale) - (lineDist * 0.3), eetzaalY + (meterScale * 3.9));
+        ctx.lineTo(eetzaalX + (13.20 * meterScale) + (lineDist * 0.3), eetzaalY + (meterScale * 3.9));
+        ctx.moveTo(eetzaalX - lineDist, eetzaalY + (meterScale * 5.7) + lineDist);
+        ctx.lineTo(eetzaalX + (13.20 * meterScale) + lineDist, eetzaalY + (meterScale * 5.7) + lineDist);
+        ctx.moveTo(eetzaalX - lineDist, eetzaalY + (meterScale * 5.7) + (lineDist * 2));
+        ctx.lineTo(eetzaalX + (13.20 * meterScale) + lineDist, eetzaalY + (meterScale * 5.7) + (lineDist * 2));
+        ctx.moveTo(eetzaalX, eetzaalY + (meterScale * 4.3) + (lineDist * 0.5));
+        ctx.lineTo(eetzaalX, eetzaalY + (meterScale * 5.7) + (lineDist * 2.5));
+        ctx.moveTo(eetzaalX + (meterScale * 2.3), eetzaalY + (meterScale * 4.3) + (lineDist * 0.5));
+        ctx.lineTo(eetzaalX + (meterScale * 2.3), eetzaalY + (meterScale * 5.7) + (lineDist * 1.5));
+        ctx.moveTo(eetzaalX + (meterScale * 3.2), eetzaalY + (meterScale * 4.3) + (lineDist * 0.5));
+        ctx.lineTo(eetzaalX + (meterScale * 3.2), eetzaalY + (meterScale * 5.7) + (lineDist * 1.5));
+        ctx.moveTo(eetzaalX + (meterScale * 4.1), eetzaalY + (meterScale * 4.3) + (lineDist * 0.5));
+        ctx.lineTo(eetzaalX + (meterScale * 4.1), eetzaalY + (meterScale * 5.7) + (lineDist * 1.5));
+        ctx.moveTo(eetzaalX + (meterScale * 4.6), eetzaalY + (meterScale * 4.3) + (lineDist * 0.5));
+        ctx.lineTo(eetzaalX + (meterScale * 4.6), eetzaalY + (meterScale * 5.7) + (lineDist * 1.5));
+        ctx.moveTo(eetzaalX+ (13.20 * meterScale), eetzaalY + (meterScale * 5.7) + (lineDist * 0.5));
+        ctx.lineTo(eetzaalX+ (13.20 * meterScale), eetzaalY + (meterScale * 5.7) + (lineDist * 2.5));
+        ctx.stroke();
+
+        ctx.fillText('13.20m', eetzaalX + ((13.20 * meterScale) / 2) - 20, offset - 5);
+        ctx.fillText('6.95m', eetzaalX + ((6.95 * meterScale) / 2) - 20, offset + lineDist - 5);
+        ctx.fillText('1.00m', (eetzaalX + (6.95 * meterScale)) + ((1 * meterScale) / 2) - 20, offset + lineDist - 5);
+        ctx.fillText('5.25m', (eetzaalX + (7.95 * meterScale)) + ((5.25 * meterScale) / 2) - 20, offset + lineDist - 5);
+        ctx.save();
+        ctx.translate(eetzaalX - lineDist - (lineDist * 0.15), eetzaalY + ((meterScale * 4.3) / 2));
+        ctx.rotate(-Math.PI / 2);
+        ctx.textAlign = "center";
+        ctx.fillText('4.30m', 0, 0);
+        ctx.restore();
+
+        ctx.save();
+        ctx.translate(eetzaalX + (13.20 * meterScale) + (2.2 * lineDist), eetzaalY + ((meterScale * 5.7) / 2));
+        ctx.rotate(Math.PI / 2);
+        ctx.textAlign = "center";
+        ctx.fillText('5.70m', 0, 0);
+        ctx.restore();
+
+        ctx.save();
+        ctx.translate(eetzaalX + (13.20 * meterScale) + (1.2 * lineDist), eetzaalY + ((meterScale * 1.6) / 2));
+        ctx.rotate(Math.PI / 2);
+        ctx.textAlign = "center";
+        ctx.fillText('1.60m', 0, 0);
+        ctx.restore();
+
+        ctx.save();
+        ctx.translate(eetzaalX + (13.20 * meterScale) + (1.2 * lineDist), eetzaalY + (meterScale * 1.6) + ((meterScale * 2.3) / 2));
+        ctx.rotate(Math.PI / 2);
+        ctx.textAlign = "center";
+        ctx.fillText('2.30m', 0, 0);
+        ctx.restore();
+
+        ctx.save();
+        ctx.translate(eetzaalX + (13.20 * meterScale) + (1.2 * lineDist), eetzaalY + (meterScale * 3.9) + ((meterScale * 1.8) / 2));
+        ctx.rotate(Math.PI / 2);
+        ctx.textAlign = "center";
+        ctx.fillText('1.80m', 0, 0);
+        ctx.restore();
+
+        var x = eetzaalX;
+        var y = eetzaalY;
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+        x = x + (13.20 * meterScale);
+        ctx.lineTo(x, y);
+        y = y + (5.70 * meterScale);
+        ctx.lineTo(x, y);
+        x = x - (6.25 * meterScale);
+        ctx.lineTo(x, y);
+        y = y - (2 * meterScale);
+        ctx.lineTo(x, y);
+        x = x - (2.35 * meterScale);
+        ctx.lineTo(x, y);
+        x = x - (0.5 * meterScale);
+        y = y + (0.55 * meterScale);
+        ctx.lineTo(x, y);
+        x = eetzaalX;
+        ctx.lineTo(x, y);
+        y = eetzaalY;
+        ctx.lineTo(x, y);
+
+        ctx.stroke();
+    } else {
+        // canvas-unsupported code here
+    }
+    // End of canvas stuff
+
     var addButton = function (obj, index, array) {
         $('#button-list').append($('<input/>', { type: "button", value: obj.name, onclick: "onAdd(" + index + ");" }));
     }
