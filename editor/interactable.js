@@ -5,7 +5,9 @@ var dragMode = true;
 var danspaal = false;
 
 var canvasWidth = 1400;
+var canvasHeight = 800;
 var meterScale = 80;
+var arrowHeadSize = 15;
 
 var objects = [
     { name: "Eettafel", width: 120, height: 80, color: "#0000FF", border: "#000000" },
@@ -16,6 +18,30 @@ var objects = [
     { name: "Feestbar groot", width: 360, height: 50, color: "#654321", border: "#000000" }
 ];
 
+var drawLine = function(context, x1, y1, x2, y2) {
+	context.moveTo(x1, y1);
+    context.lineTo(x2, y2);
+}
+
+var drawArrowHead = function(context, x, y, dir) {
+	context.beginPath();
+	context.moveTo(x, y);
+	if(dir == 0){
+		context.lineTo(x + (arrowHeadSize * 0.5), y + arrowHeadSize);
+		context.lineTo(x - (arrowHeadSize * 0.5), y + arrowHeadSize);
+	} else if(dir == 1) {
+		context.lineTo(x - arrowHeadSize, y + (arrowHeadSize * 0.5));
+		context.lineTo(x - arrowHeadSize, y - (arrowHeadSize * 0.5));
+	} else if(dir == 2) {
+		context.lineTo(x + (arrowHeadSize * 0.5), y - arrowHeadSize);
+		context.lineTo(x - (arrowHeadSize * 0.5), y - arrowHeadSize);
+	} else if(dir == 3) {
+		context.lineTo(x + arrowHeadSize, y + (arrowHeadSize * 0.5));
+		context.lineTo(x + arrowHeadSize, y - (arrowHeadSize * 0.5));
+	}
+	context.fill();
+}
+
 $(document).ready(function () {
     // Start of canvas stuff
     var canvas = document.getElementById('canvas');
@@ -23,8 +49,8 @@ $(document).ready(function () {
     if (canvas.getContext) {
         var ctx = canvas.getContext('2d');
         // drawing code here
-        ctx.fillRect(0, 0, canvasWidth, canvasWidth);
-        ctx.clearRect(5, 5, canvasWidth - 10, canvasWidth - 10);
+        ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+        ctx.clearRect(5, 5, canvasWidth - 10, canvasHeight - 10);
 
         var offset = 50;
         var lineDist = meterScale * 0.5;
@@ -35,58 +61,46 @@ $(document).ready(function () {
         ctx.font = '14px Arial';
 
         ctx.beginPath();
-        ctx.moveTo(offset, offset);
-        ctx.lineTo(offset + (13.20 * meterScale) + lineDist, offset);
-        ctx.moveTo(offset, offset + lineDist);
-        ctx.lineTo(offset + (13.20 * meterScale) + lineDist, offset + lineDist);
+		//drawLine(ctx, 
+		drawLine(ctx, offset, offset, offset + (13.20 * meterScale) + lineDist, offset);
+		drawLine(ctx, offset, offset + lineDist, offset + (13.20 * meterScale) + lineDist, offset + lineDist);
 
-        ctx.moveTo(eetzaalX, offset - (lineDist / 2));
-        ctx.lineTo(eetzaalX, offset + (lineDist * 1.5));
-        ctx.moveTo(eetzaalX + (13.20 * meterScale), offset - (lineDist / 2));
-        ctx.lineTo(eetzaalX + (13.20 * meterScale), offset + (lineDist * 1.5));
-        ctx.moveTo(eetzaalX + (6.95 * meterScale), offset + (lineDist * 0.5));
-        ctx.lineTo(eetzaalX + (6.95 * meterScale), offset + (lineDist * 1.5));
-        ctx.moveTo(eetzaalX + (7.95 * meterScale), offset + (lineDist * 0.5));
-        ctx.lineTo(eetzaalX + (7.95 * meterScale), offset + (lineDist * 1.5));
-        ctx.moveTo(eetzaalX - lineDist, eetzaalY - (lineDist * 0.5));
-        ctx.lineTo(eetzaalX - lineDist, eetzaalY + (meterScale * 4.3) + (lineDist * 0.5));
-        ctx.moveTo(eetzaalX - (lineDist * 1.5), eetzaalY);
-        ctx.lineTo(eetzaalX - (lineDist * 0.5), eetzaalY);
-        ctx.moveTo(eetzaalX - (lineDist * 1.5), eetzaalY + (meterScale * 4.3));
-        ctx.lineTo(eetzaalX - (lineDist * 0.5), eetzaalY + (meterScale * 4.3));
-        ctx.moveTo(eetzaalX + (13.20 * meterScale) + lineDist, eetzaalY - (lineDist * 0.5));
-        ctx.lineTo(eetzaalX + (13.20 * meterScale) + lineDist, eetzaalY + (meterScale * 5.7) + (lineDist * 0.5));
-        ctx.moveTo(eetzaalX + (13.20 * meterScale) + (lineDist * 2), eetzaalY - (lineDist * 0.5));
-        ctx.lineTo(eetzaalX + (13.20 * meterScale) + (lineDist * 2), eetzaalY + (meterScale * 5.7) + (lineDist * 0.5));
-        ctx.moveTo(eetzaalX + (13.20 * meterScale) + lineDist - (lineDist * 0.5), eetzaalY);
-        ctx.lineTo(eetzaalX + (13.20 * meterScale) + lineDist + (lineDist * 1.5), eetzaalY);
-        ctx.moveTo(eetzaalX + (13.20 * meterScale) + lineDist - (lineDist * 0.5), eetzaalY + (meterScale * 5.7));
-        ctx.lineTo(eetzaalX + (13.20 * meterScale) + lineDist + (lineDist * 1.5), eetzaalY + (meterScale * 5.7));
-        ctx.moveTo(eetzaalX + (13.20 * meterScale) + lineDist - (lineDist * 0.5), eetzaalY + (meterScale * 1.6));
-        ctx.lineTo(eetzaalX + (13.20 * meterScale) + lineDist + (lineDist * 0.5), eetzaalY + (meterScale * 1.6));
-        ctx.moveTo(eetzaalX + (13.20 * meterScale) + lineDist - (lineDist * 0.5), eetzaalY + (meterScale * 3.9));
-        ctx.lineTo(eetzaalX + (13.20 * meterScale) + lineDist + (lineDist * 0.5), eetzaalY + (meterScale * 3.9));
-        ctx.moveTo(eetzaalX + (13.20 * meterScale) - (lineDist * 0.3), eetzaalY + (meterScale * 1.6));
-        ctx.lineTo(eetzaalX + (13.20 * meterScale) + (lineDist * 0.3), eetzaalY + (meterScale * 1.6));
-        ctx.moveTo(eetzaalX + (13.20 * meterScale) - (lineDist * 0.3), eetzaalY + (meterScale * 3.9));
-        ctx.lineTo(eetzaalX + (13.20 * meterScale) + (lineDist * 0.3), eetzaalY + (meterScale * 3.9));
-        ctx.moveTo(eetzaalX - lineDist, eetzaalY + (meterScale * 5.7) + lineDist);
-        ctx.lineTo(eetzaalX + (13.20 * meterScale) + lineDist, eetzaalY + (meterScale * 5.7) + lineDist);
-        ctx.moveTo(eetzaalX - lineDist, eetzaalY + (meterScale * 5.7) + (lineDist * 2));
-        ctx.lineTo(eetzaalX + (13.20 * meterScale) + lineDist, eetzaalY + (meterScale * 5.7) + (lineDist * 2));
-        ctx.moveTo(eetzaalX, eetzaalY + (meterScale * 4.3) + (lineDist * 0.5));
-        ctx.lineTo(eetzaalX, eetzaalY + (meterScale * 5.7) + (lineDist * 2.5));
-        ctx.moveTo(eetzaalX + (meterScale * 2.3), eetzaalY + (meterScale * 4.3) + (lineDist * 0.5));
-        ctx.lineTo(eetzaalX + (meterScale * 2.3), eetzaalY + (meterScale * 5.7) + (lineDist * 1.5));
-        ctx.moveTo(eetzaalX + (meterScale * 3.2), eetzaalY + (meterScale * 4.3) + (lineDist * 0.5));
-        ctx.lineTo(eetzaalX + (meterScale * 3.2), eetzaalY + (meterScale * 5.7) + (lineDist * 1.5));
-        ctx.moveTo(eetzaalX + (meterScale * 4.1), eetzaalY + (meterScale * 4.3) + (lineDist * 0.5));
-        ctx.lineTo(eetzaalX + (meterScale * 4.1), eetzaalY + (meterScale * 5.7) + (lineDist * 1.5));
-        ctx.moveTo(eetzaalX + (meterScale * 4.6), eetzaalY + (meterScale * 4.3) + (lineDist * 0.5));
-        ctx.lineTo(eetzaalX + (meterScale * 4.6), eetzaalY + (meterScale * 5.7) + (lineDist * 1.5));
-        ctx.moveTo(eetzaalX+ (13.20 * meterScale), eetzaalY + (meterScale * 5.7) + (lineDist * 0.5));
-        ctx.lineTo(eetzaalX+ (13.20 * meterScale), eetzaalY + (meterScale * 5.7) + (lineDist * 2.5));
+		drawLine(ctx, eetzaalX, offset - (lineDist / 2), eetzaalX, offset + (lineDist * 1.5));
+		drawLine(ctx, eetzaalX + (13.20 * meterScale), offset - (lineDist / 2), eetzaalX + (13.20 * meterScale), offset + (lineDist * 1.5));
+        drawLine(ctx, eetzaalX + (6.95 * meterScale), offset + (lineDist * 0.5), eetzaalX + (6.95 * meterScale), offset + (lineDist * 1.5));
+        drawLine(ctx, eetzaalX + (7.95 * meterScale), offset + (lineDist * 0.5), eetzaalX + (7.95 * meterScale), offset + (lineDist * 1.5));
+        drawLine(ctx, eetzaalX - lineDist, eetzaalY - (lineDist * 0.5), eetzaalX - lineDist, eetzaalY + (meterScale * 4.3) + (lineDist * 0.5));
+        drawLine(ctx, eetzaalX - (lineDist * 1.5), eetzaalY, eetzaalX - (lineDist * 0.5), eetzaalY);
+        drawLine(ctx, eetzaalX - (lineDist * 1.5), eetzaalY + (meterScale * 4.3), eetzaalX - (lineDist * 0.5), eetzaalY + (meterScale * 4.3));
+        drawLine(ctx, eetzaalX + (13.20 * meterScale) + lineDist, eetzaalY - (lineDist * 0.5), eetzaalX + (13.20 * meterScale) + lineDist, eetzaalY + (meterScale * 5.7) + (lineDist * 0.5));
+        drawLine(ctx, eetzaalX + (13.20 * meterScale) + (lineDist * 2), eetzaalY - (lineDist * 0.5), eetzaalX + (13.20 * meterScale) + (lineDist * 2), eetzaalY + (meterScale * 5.7) + (lineDist * 0.5));
+        drawLine(ctx, eetzaalX + (13.20 * meterScale) + lineDist - (lineDist * 0.5), eetzaalY, eetzaalX + (13.20 * meterScale) + lineDist + (lineDist * 1.5), eetzaalY);
+        drawLine(ctx, eetzaalX + (13.20 * meterScale) + lineDist - (lineDist * 0.5), eetzaalY + (meterScale * 5.7), eetzaalX + (13.20 * meterScale) + lineDist + (lineDist * 1.5), eetzaalY + (meterScale * 5.7));
+        drawLine(ctx, eetzaalX + (13.20 * meterScale) + lineDist - (lineDist * 0.5), eetzaalY + (meterScale * 1.6), eetzaalX + (13.20 * meterScale) + lineDist + (lineDist * 0.5), eetzaalY + (meterScale * 1.6));
+        drawLine(ctx, eetzaalX + (13.20 * meterScale) + lineDist - (lineDist * 0.5), eetzaalY + (meterScale * 3.9), eetzaalX + (13.20 * meterScale) + lineDist + (lineDist * 0.5), eetzaalY + (meterScale * 3.9));
+        drawLine(ctx, eetzaalX + (13.20 * meterScale) - (lineDist * 0.3), eetzaalY + (meterScale * 1.6), eetzaalX + (13.20 * meterScale) + (lineDist * 0.3), eetzaalY + (meterScale * 1.6));
+        drawLine(ctx, eetzaalX + (13.20 * meterScale) - (lineDist * 0.3), eetzaalY + (meterScale * 3.9), eetzaalX + (13.20 * meterScale) + (lineDist * 0.3), eetzaalY + (meterScale * 3.9));
+        drawLine(ctx, eetzaalX - lineDist, eetzaalY + (meterScale * 5.7) + lineDist, eetzaalX + (13.20 * meterScale) + lineDist, eetzaalY + (meterScale * 5.7) + lineDist);
+        drawLine(ctx, eetzaalX - lineDist, eetzaalY + (meterScale * 5.7) + (lineDist * 2), eetzaalX + (13.20 * meterScale) + lineDist, eetzaalY + (meterScale * 5.7) + (lineDist * 2));
+        drawLine(ctx, eetzaalX, eetzaalY + (meterScale * 4.3) + (lineDist * 0.5), eetzaalX, eetzaalY + (meterScale * 5.7) + (lineDist * 2.5));
+        drawLine(ctx, eetzaalX + (meterScale * 2.3), eetzaalY + (meterScale * 4.3) + (lineDist * 0.5), eetzaalX + (meterScale * 2.3), eetzaalY + (meterScale * 5.7) + (lineDist * 1.5));
+        drawLine(ctx, eetzaalX + (meterScale * 3.2), eetzaalY + (meterScale * 4.3) + (lineDist * 0.5), eetzaalX + (meterScale * 3.2), eetzaalY + (meterScale * 5.7) + (lineDist * 1.5));
+        drawLine(ctx, eetzaalX + (meterScale * 4.1), eetzaalY + (meterScale * 4.3) + (lineDist * 0.5), eetzaalX + (meterScale * 4.1), eetzaalY + (meterScale * 5.7) + (lineDist * 1.5));
+        drawLine(ctx, eetzaalX + (meterScale * 4.6), eetzaalY + (meterScale * 4.3) + (lineDist * 0.5), eetzaalX + (meterScale * 4.6), eetzaalY + (meterScale * 5.7) + (lineDist * 1.5));
+		drawLine(ctx, eetzaalX + (meterScale * 6.95), eetzaalY + (meterScale * 5.7) + (lineDist * 0.5), eetzaalX + (meterScale * 6.95), eetzaalY + (meterScale * 5.7) + (lineDist * 1.5));
+		drawLine(ctx, eetzaalX + (meterScale * 6), eetzaalY, eetzaalX + (meterScale * 6), eetzaalY + (meterScale * 5.7));
+        drawLine(ctx, eetzaalX + (13.20 * meterScale), eetzaalY + (meterScale * 5.7) + (lineDist * 0.5), eetzaalX + (13.20 * meterScale), eetzaalY + (meterScale * 5.7) + (lineDist * 2.5));
+		drawLine(ctx, eetzaalX + (6.95 * meterScale) - lineDist, eetzaalY + (meterScale * 4.3), eetzaalX + (6.95 * meterScale) - lineDist, eetzaalY + (meterScale * 5.2));
         ctx.stroke();
+		
+		drawArrowHead(ctx, eetzaalX + (meterScale * 6), eetzaalY, 0);
+		drawArrowHead(ctx, eetzaalX + (meterScale * 6), eetzaalY + (meterScale * 3.7), 2);
+		
+		drawArrowHead(ctx, eetzaalX + (meterScale * 6), eetzaalY + (meterScale * 3.7), 0);
+		drawArrowHead(ctx, eetzaalX + (meterScale * 6), eetzaalY + (meterScale * 5.72), 2);
+		
+		drawArrowHead(ctx, eetzaalX + (meterScale * 6.95) - lineDist, eetzaalY + (meterScale * 4.27), 0);
+		drawArrowHead(ctx, eetzaalX + (meterScale * 6.95) - lineDist, eetzaalY + (meterScale * 5.23), 2);
 
         ctx.fillText('13.20m', eetzaalX + ((13.20 * meterScale) / 2) - 20, offset - 5);
         ctx.fillText('6.95m', eetzaalX + ((6.95 * meterScale) / 2) - 20, offset + lineDist - 5);
@@ -207,7 +221,8 @@ $(document).ready(function () {
 
 // 57 pixels is 100cm       213 * x / 375  - border size * 2 - padding * 2
 var scaleSize = function (x) {
-    return (((57 * x) / 100) * scale) - 10.0 - 20.0;
+	return x / 100 * meterScale;
+    //return (((57 * x) / 100) * scale) - 10.0 - 20.0;
 }
 
 var onAdd = function (index) {
@@ -217,7 +232,7 @@ var onAdd = function (index) {
     var item = $("<div />", {
         id: itemID,
         "class": "draggable",
-        style: "width: " + scaleSize(obj.width) + "px; height: " + scaleSize(obj.height) + "px; background-color: " + obj.color + "; border: 5px solid " + obj.border + ";"
+        style: "width: " + (scaleSize(obj.width) - 30) + "px; height: " + (scaleSize(obj.height) - 30) + "px; background-color: " + obj.color + "; border: 5px solid " + obj.border + ";"
     });
     item.text(obj.name);
 
