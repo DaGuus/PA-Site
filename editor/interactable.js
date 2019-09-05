@@ -91,6 +91,8 @@ $(document).ready(function () {
 		drawLine(ctx, eetzaalX + (meterScale * 6), eetzaalY, eetzaalX + (meterScale * 6), eetzaalY + (meterScale * 5.7));
         drawLine(ctx, eetzaalX + (13.20 * meterScale), eetzaalY + (meterScale * 5.7) + (lineDist * 0.5), eetzaalX + (13.20 * meterScale), eetzaalY + (meterScale * 5.7) + (lineDist * 2.5));
 		drawLine(ctx, eetzaalX + (6.95 * meterScale) - lineDist, eetzaalY + (meterScale * 4.3), eetzaalX + (6.95 * meterScale) - lineDist, eetzaalY + (meterScale * 5.2));
+        drawLine(ctx, eetzaalX + (meterScale * 6.95) - (lineDist * 0.5), eetzaalY + (meterScale * 4.3), eetzaalX + (meterScale * 6.95) + (lineDist * 0.5), eetzaalY + (meterScale * 4.3));
+        drawLine(ctx, eetzaalX + (meterScale * 6.95) - (lineDist * 0.5), eetzaalY + (meterScale * 5.2), eetzaalX + (meterScale * 6.95) + (lineDist * 0.5), eetzaalY + (meterScale * 5.2));
         ctx.stroke();
 		
 		drawArrowHead(ctx, eetzaalX + (meterScale * 6), eetzaalY, 0);
@@ -106,6 +108,12 @@ $(document).ready(function () {
         ctx.fillText('6.95m', eetzaalX + ((6.95 * meterScale) / 2) - 20, offset + lineDist - 5);
         ctx.fillText('1.00m', (eetzaalX + (6.95 * meterScale)) + ((1 * meterScale) / 2) - 20, offset + lineDist - 5);
         ctx.fillText('5.25m', (eetzaalX + (7.95 * meterScale)) + ((5.25 * meterScale) / 2) - 20, offset + lineDist - 5);
+        ctx.fillText('2.30m', (eetzaalX) + ((2.30 * meterScale) / 2) - 10, eetzaalY + (meterScale * 5.7) + lineDist - 5);
+        ctx.fillText('0.90m', (eetzaalX) + (2.3 * meterScale) + ((0.9 * meterScale) / 2) - 15, eetzaalY + (meterScale * 5.7) + lineDist - 5);
+        ctx.fillText('0.90m', (eetzaalX) + (3.2 * meterScale) + ((0.9 * meterScale) / 2) - 15, eetzaalY + (meterScale * 5.7) + lineDist - 5);
+        ctx.fillText('0.50m', (eetzaalX) + (4.1 * meterScale) + ((0.5 * meterScale) / 2) - 20, eetzaalY + (meterScale * 5.7) + lineDist - 5);
+        ctx.fillText('2.35m', (eetzaalX) + (4.6 * meterScale) + ((2.35 * meterScale) / 2) - 20, eetzaalY + (meterScale * 5.7) + lineDist - 5);
+        ctx.fillText('6.25m', (eetzaalX) + (6.95 * meterScale) + ((6.25 * meterScale) / 2) - 20, eetzaalY + (meterScale * 5.7) + lineDist - 5);
         ctx.save();
         ctx.translate(eetzaalX - lineDist - (lineDist * 0.15), eetzaalY + ((meterScale * 4.3) / 2));
         ctx.rotate(-Math.PI / 2);
@@ -139,6 +147,27 @@ $(document).ready(function () {
         ctx.rotate(Math.PI / 2);
         ctx.textAlign = "center";
         ctx.fillText('1.80m', 0, 0);
+        ctx.restore();
+
+        ctx.save();
+        ctx.translate(eetzaalX + (meterScale * 6.95) - lineDist + 5, eetzaalY + (meterScale * 4.27) + (meterScale * 0.9 / 2));
+        ctx.rotate(Math.PI / 2);
+        ctx.textAlign = "center";
+        ctx.fillText('0.9m', 0, 0);
+        ctx.restore();
+
+        ctx.save();
+        ctx.translate(eetzaalX + (meterScale * 6) + 5, eetzaalY + (meterScale * 3.7) + (meterScale));
+        ctx.rotate(Math.PI / 2);
+        ctx.textAlign = "center";
+        ctx.fillText('2.00m', 0, 0);
+        ctx.restore();
+
+        ctx.save();
+        ctx.translate(eetzaalX + (meterScale * 6) + 5, eetzaalY + (meterScale * 3.75 / 2));
+        ctx.rotate(Math.PI / 2);
+        ctx.textAlign = "center";
+        ctx.fillText('3.75m', 0, 0);
         ctx.restore();
 
         var x = eetzaalX;
