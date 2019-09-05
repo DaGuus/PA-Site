@@ -207,12 +207,12 @@ $(document).ready(function () {
             var item = $("<div />", {
                 id: "danspaal-div",
                 "class": "danspaal",
-                style: "width: " + scaleSize(160) + "px; height: " + scaleSize(80) + "px; background-color: #09ad00; border: 5px solid black;"
+                style: "width: " + (scaleSize(160) - 30) + "px; height: " + (scaleSize(80) - 30) + "px; background-color: #09ad00; border: 5px solid black;"
             });
             item.text("Danspaal");
             $(".container").append(item);
 
-            document.getElementById("danspaal-div").style.transform = "translate(" + scaleSize(560) + "px, " + scaleSize(360) + "px)";
+            document.getElementById("danspaal-div").style.transform = "translate(" + (eetzaalX + (3.2 * meterScale)) + "px, " + (eetzaalY + ((3.75 / 2) * meterScale) - (scaleSize(80) / 2)) + "px)";
 
             $('#danspaal').val("Verwijder danspaal");
         }
